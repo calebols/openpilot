@@ -173,10 +173,17 @@ class DriverStatus():
     pitch_error *= _PITCH_WEIGHT
     pose_metric = sqrt(yaw_error**2 + pitch_error**2)
 
+#CLO    if pose_metric > _METRIC_THRESHOLD*pose.cfactor:
+#CLO      return DistractedType.BAD_POSE
+#CLO    elif (blink.left_blink + blink.right_blink)*0.5 > _BLINK_THRESHOLD*blink.cfactor:
+#CLO      return DistractedType.BAD_BLINK
+#CLO    else:
+#CLO      return DistractedType.NOT_DISTRACTED
+
     if pose_metric > _METRIC_THRESHOLD*pose.cfactor:
-      return DistractedType.BAD_POSE
+      return DistractedType.NOT_DISTRACTED
     elif (blink.left_blink + blink.right_blink)*0.5 > _BLINK_THRESHOLD*blink.cfactor:
-      return DistractedType.BAD_BLINK
+     return DistractedType.NOT_DISTRACTED
     else:
       return DistractedType.NOT_DISTRACTED
 
